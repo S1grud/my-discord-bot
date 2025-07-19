@@ -2,4 +2,3 @@ openai
 requests
 discord.py
 python-dotenv
-wavelink

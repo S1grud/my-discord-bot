@@ -1,23 +1,14 @@
-FROM debian:bookworm-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Установка зависимостей
-RUN apt-get update && \
-    apt-get install -y openjdk-17-jre-headless python3 python3-pip wget && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Копируем requirements.txt и ставим зависимости Python
-COPY requirements.txt /app/requirements.txt
-RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем остальной код
 COPY . /app
 
-WORKDIR /app
-
 RUN chmod +x /app/entrypoint.sh
-
-EXPOSE 2333
 
 CMD ["/app/entrypoint.sh"]
