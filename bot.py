@@ -44,28 +44,6 @@ async def on_ready():
 
   await botie.tree.sync(guild=discord.Object(id=1090677113767604307))
   print("Слэш-команды синхронизированы.")
-  
-  node = wavelink.Node(uri=LAVALINK_URI, password=LAVALINK_PASSWORD)
-  await wavelink.Pool.connect(nodes=[node], client=botie)
-  
-
-@botie.event
-async def on_wavelink_node_ready(payload: wavelink.NodeReadyEventPayload):
-    print(f"Узел Wavelink {payload.node.identifier} готов.")
-
-@botie.event
-async def on_wavelink_track_end(payload: wavelink.TrackEndEventPayload):
-    player: wavelink.Player = payload.player
-    
-    if player.queue.is_empty:
-        return
-
-    next_track = player.queue.get()
-
-    await player.play(next_track)
-
-    if hasattr(player, "home") and player.home:
-        await player.home.send(f"▶️ Включаю: **{next_track.title}**")
 
 # bot commands (with / hints)
 
