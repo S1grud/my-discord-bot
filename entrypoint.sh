@@ -1,11 +1,9 @@
 #!/bin/bash
 set -e
 
-# Запускаем Lavalink в фоне
 java -jar /opt/Lavalink/Lavalink.jar &
 
-# Ждем несколько секунд, чтобы Lavalink стартовал
-sleep 10
+echo "Wait for Lavalink to start..."
+sleep 30  # можно увеличить если всё равно не хватает
 
-# Запускаем Discord-бота (Python)
 exec python3 /app/bot.py
