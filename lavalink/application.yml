@@ -1,0 +1,30 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+
+lavalink:
+  server:
+    password: "kvsao@#fkao1"
+    sources:
+      youtube: false
+    plugins:
+      - dependency: "com.github.lavalink-devs:youtube-source:1.13.3"
+        snapshot: false
+    
+    youtube:
+      clients:
+        - "MUSIC"
+        - "ANDROID"
+        - "WEB"
+      authentication:
+        cookiesFile: "cookies.txt"
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
