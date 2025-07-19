@@ -13,7 +13,7 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 DISCORD_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 # check if keys exist
-if not OPENAI_KEY or not DISCORD_TOKEN or not LAVALINK_PASSWORD:
+if not OPENAI_KEY or not DISCORD_TOKEN:
     print("Ошибка: Убедитесь, что вы создали .env файл с OPENAI_API_KEY и DISCORD_BOT_TOKEN")
     exit()
 
