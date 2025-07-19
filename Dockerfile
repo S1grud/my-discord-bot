@@ -13,19 +13,15 @@ RUN mkdir -p /opt/Lavalink && \
 
 # Копируем requirements.txt и ставим зависимости Python
 COPY requirements.txt /app/requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 # Копируем остальной код
 COPY . /app
 
-# Указываем рабочую директорию
 WORKDIR /app
 
-# Делаем entrypoint.sh исполняемым
 RUN chmod +x /app/entrypoint.sh
 
-# Открываем порт Lavalink (2333)
 EXPOSE 2333
 
-# Запуск обоих сервисов
 CMD ["/app/entrypoint.sh"]
