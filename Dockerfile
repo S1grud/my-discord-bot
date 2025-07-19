@@ -10,6 +10,7 @@ RUN apt-get update && \
 # Скачиваем Lavalink
 RUN mkdir -p /opt/Lavalink && \
     wget -O /opt/Lavalink/Lavalink.jar https://github.com/freyacodes/Lavalink/releases/download/4.0.0/Lavalink.jar
+COPY application.yml /opt/Lavalink/application.yml
 
 # Копируем requirements.txt и ставим зависимости Python
 COPY requirements.txt /app/requirements.txt
