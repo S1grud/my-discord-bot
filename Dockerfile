@@ -1,3 +1,4 @@
+
 FROM ghcr.io/lavalink-devs/lavalink:4
 
 # Install Python for the bot
