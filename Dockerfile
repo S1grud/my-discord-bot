@@ -7,11 +7,6 @@ RUN apt-get update && \
     apt-get install -y openjdk-17-jre-headless python3 python3-pip wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Скачиваем Lavalink
-RUN mkdir -p /opt/Lavalink && \
-    wget -O /opt/Lavalink/Lavalink.jar https://github.com/freyacodes/Lavalink/releases/download/4.0.0/Lavalink.jar
-COPY application.yml /opt/Lavalink/application.yml
-
 # Копируем requirements.txt и ставим зависимости Python
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
