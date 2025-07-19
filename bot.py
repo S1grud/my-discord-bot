@@ -6,14 +6,11 @@ import json
 import openai
 import os
 from dotenv import load_dotenv
-import wavelink
 
 # load keys
 load_dotenv()
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 DISCORD_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-LAVALINK_PASSWORD = os.getenv("LAVALINK_PASSWORD")
-LAVALINK_URI = os.getenv("LAVALINK_URI", "http://localhost:2333")
 
 # check if keys exist
 if not OPENAI_KEY or not DISCORD_TOKEN or not LAVALINK_PASSWORD:
