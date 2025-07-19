@@ -1,22 +1,31 @@
-
-FROM ghcr.io/lavalink-devs/lavalink:4
-
-# Install Python for the bot
-RUN apt-get update \
-    && apt-get install -y python3 python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+FROM debian:bookworm-slim
 
 WORKDIR /app
-COPY requirements.txt ./
+
+# Установка зависимостей
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jre-headless python3 python3-pip wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Скачиваем Lavalink
+RUN mkdir -p /opt/Lavalink && \
+    wget -O /opt/Lavalink/Lavalink.jar https://github.com/freyacodes/Lavalink/releases/download/4.0.0/Lavalink.jar
+
+# Копируем requirements.txt и ставим зависимости Python
+COPY requirements.txt /app/requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY bot.py ./
-COPY entrypoint.sh ./
-RUN chmod +x entrypoint.sh
+# Копируем остальной код
+COPY . /app
 
-# Lavalink configuration
-COPY lavalink/application.yml /opt/Lavalink/application.yml
-COPY lavalink/plugins /opt/Lavalink/plugins
-COPY lavalink/cookies.txt /opt/Lavalink/cookies.txt
+# Указываем рабочую директорию
+WORKDIR /app
 
+# Делаем entrypoint.sh исполняемым
+RUN chmod +x /app/entrypoint.sh
+
+# Открываем порт Lavalink (2333)
+EXPOSE 2333
+
+# Запуск обоих сервисов
 CMD ["/app/entrypoint.sh"]
