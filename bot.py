@@ -6,6 +6,21 @@ import json
 import openai
 import os
 from dotenv import load_dotenv
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+def run_http_server():
+    class SimpleHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b'OK')
+
+    server = HTTPServer(('0.0.0.0', 8000), SimpleHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_http_server, daemon=True).start()
+
 
 # load keys
 load_dotenv()
